@@ -1,9 +1,9 @@
-import api, { bmmUrl } from './api';
+import api from './api';
 import type { BmmTrack } from '../types';
 
 export async function fetchBmmCatalog(url?: string): Promise<BmmTrack[]> {
-  // Default to BMM base + /catalog if no url provided
-  const fetchUrl = url ?? bmmUrl('/catalog');
+  // Use proxy pattern for BMM API calls
+  const fetchUrl = url ?? '/api/bmm/podcast';
   const { data } = await api.get(fetchUrl, { responseType: 'json' });
   // Accept multiple response shapes: an array, or an object with `items` or `tracks` arrays
   let items: any = data;
